@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Jornada | Em Construção</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #050505; /* Fundo imersivo, como um refúgio silencioso */
+            --text-pure: #ffffff;
+            --text-muted: #555555;
+            --text-mid: #b3b3b3;
+            --accent: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-mid);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Barra de progresso da leitura no topo */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background-color: var(--text-muted);
+            width: 0%;
+            z-index: 100;
+            transition: width 0.1s ease-out;
+        }
+
+        /* Container que força a rolagem e cria o ritmo */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* As classes de animação aprimoradas */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            filter: blur(10px); /* O texto nasce embaçado e clareia */
+            transition: opacity 1.5s ease-out, transform 1.5s ease-out, filter 1.5s ease-out;
+            will-change: opacity, transform, filter;
+            margin-bottom: 2rem; /* Espaçamento entre parágrafos no mesmo bloco */
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        /* Atrasos em cascata se houver mais de um parágrafo na tela */
+        .delay-1 { transition-delay: 0.3s; }
+        .delay-2 { transition-delay: 0.6s; }
+
+        /* Tipografia */
+        p {
+            font-size: 1.15rem;
+            font-weight: 300;
+            line-height: 2.2;
+            color: var(--text-mid);
+            letter-spacing: 0.5px;
+            max-width: 650px;
+        }
+
+        .title-huge {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 300;
+            color: var(--text-pure);
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .quote-emphasis {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-style: italic;
+            color: var(--text-pure);
+            line-height: 1.5;
+            padding: 2rem 0;
+            position: relative;
+        }
+
+        .quote-emphasis::before, .quote-emphasis::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 1px;
+            background-color: var(--accent);
+            margin: 1.5rem auto;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            animation: breathe 3s infinite ease-in-out;
+        }
+
+        @keyframes breathe {
+            0%, 100% { opacity: 0.2; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(5px); }
+        }
+
+        .footer {
+            margin-top: 4rem;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-top: 1px solid var(--accent);
+            padding-top: 2rem;
+            width: 100%;
+        }
+        
+        .footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.4s ease;
+        }
+
+        .footer a:hover {
+            color: var(--text-pure);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="progress-bar" id="progressBar"></div>
+
+    <section style="position: relative;">
+        <h1 class="reveal title-huge">Há uma beleza silenciosa<br>em admitir a própria fragilidade.</h1>
+        <div class="scroll-down">Continue</div>
+    </section>
+
+    <section>
+        <p class="reveal">Durante muito tempo, o mundo me fez convites sedutores, e tentei caminhar por mim mesmo, acreditando que a bússola das minhas próprias vontades seria o suficiente.</p>
+        <p class="reveal delay-1">Mas o caminho é ruidoso, e eu aprendi — muitas vezes da maneira mais dolorosa — que não posso confiar apenas em mim.</p>
+    </section>
+
+    <section>
+        <p class="reveal">O bem que almejo frequentemente me escapa, e os desvios tiram o meu foco daquilo que é eterno.</p>
+    </section>
+
+    <section>
+        <div class="reveal quote-emphasis">
+            "Se eu estiver andando num caminho e não enxergar as armadilhas, que a Sua mão me arranque de lá."
+        </div>
+    </section>
+
+    <section>
+        <p class="reveal">Hoje, eu reconheço que sozinho não chego a lugar nenhum. Sou um projeto em constante construção, uma obra imperfeita que precisa ser guiada para não ceder às falhas que trago em mim.</p>
+        <p class="reveal delay-1">Esta página, e tudo o que construo através do código e da vida, é o reflexo de alguém que abriu mão do controle.</p>
+    </section>
+
+    <section>
+        <p class="reveal">Porque sei que quando o meu foco se afasta, a vida estagna.</p>
+        <h2 class="reveal delay-1 title-huge" style="margin-top: 2rem;">Mas quando permito que o Pai segure a minha mão e me puxe de volta para o rumo certo, a vida, enfim, volta a fluir.</h2>
+        
+        <div class="reveal delay-2 footer">
+            <a href="https://github.com/SEU_USUARIO" target="_blank">GitHub</a>
+            <a href="mailto:seu_email@email.com">Contato</a>
+        </div>
+    </section>
+
+    <script>
+        // Lógica da Barra de Progresso
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (scrollTop / scrollHeight) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Lógica Avançada de Revelação (Intersection Observer)
+        // Isso garante que o texto só apareça quando estiver no centro da tela
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.3 // O elemento aparece quando 30% dele está visível na tela
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Opcional: remover o observer depois que aparece para não animar de novo ao subir
+                    // observer.unobserve(entry.target); 
+                } else {
+                    // Remove a classe se quiser que o texto suma ao sair da tela
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach((element) => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>
