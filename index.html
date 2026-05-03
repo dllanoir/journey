@@ -3,227 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Jornada | Em Construção</title>
-    
+    <title>O Que Fica no Silêncio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --bg-color: #050505; /* Fundo imersivo, como um refúgio silencioso */
-            --text-pure: #ffffff;
-            --text-muted: #555555;
-            --text-mid: #b3b3b3;
-            --accent: #333333;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+            --bg-color: #050505;
+            --text-main: #e5e5e5;
+            --text-muted: #737373;
+            --accent: #3b3b3b;
         }
 
         body {
             background-color: var(--bg-color);
-            color: var(--text-mid);
-            font-family: 'Montserrat', sans-serif;
+            color: var(--text-main);
+            font-family: 'Lora', serif;
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
+            scroll-behavior: smooth;
         }
 
-        /* Barra de progresso da leitura no topo */
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 2px;
-            background-color: var(--text-muted);
-            width: 0%;
-            z-index: 100;
-            transition: width 0.1s ease-out;
+        h1, h2, .title-font {
+            font-family: 'Cormorant Garamond', serif;
         }
 
-        /* Container que força a rolagem e cria o ritmo */
-        section {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* As classes de animação aprimoradas */
-        .reveal {
+        /* Animações de entrada */
+        .reveal-text {
             opacity: 0;
-            transform: translateY(50px);
-            filter: blur(10px); /* O texto nasce embaçado e clareia */
-            transition: opacity 1.5s ease-out, transform 1.5s ease-out, filter 1.5s ease-out;
-            will-change: opacity, transform, filter;
-            margin-bottom: 2rem; /* Espaçamento entre parágrafos no mesmo bloco */
+            transform: translateY(30px);
+            transition: all 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            filter: blur(5px);
         }
 
-        .reveal.active {
+        .reveal-text.visible {
             opacity: 1;
             transform: translateY(0);
-            filter: blur(0);
+            filter: blur(0px);
         }
 
-        /* Atrasos em cascata se houver mais de um parágrafo na tela */
-        .delay-1 { transition-delay: 0.3s; }
-        .delay-2 { transition-delay: 0.6s; }
-
-        /* Tipografia */
-        p {
-            font-size: 1.15rem;
-            font-weight: 300;
-            line-height: 2.2;
-            color: var(--text-mid);
-            letter-spacing: 0.5px;
-            max-width: 650px;
-        }
-
-        .title-huge {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            font-weight: 300;
-            color: var(--text-pure);
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        }
-
-        .quote-emphasis {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            font-style: italic;
-            color: var(--text-pure);
-            line-height: 1.5;
-            padding: 2rem 0;
-            position: relative;
-        }
-
-        .quote-emphasis::before, .quote-emphasis::after {
-            content: '';
-            display: block;
-            width: 40px;
-            height: 1px;
-            background-color: var(--accent);
-            margin: 1.5rem auto;
-        }
-
-        .scroll-down {
-            position: absolute;
-            bottom: 40px;
-            font-size: 0.75rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            animation: breathe 3s infinite ease-in-out;
+        /* Efeito de respiração no fundo */
+        .ambient-glow {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(255,255,255,0.02) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+            animation: breathe 8s infinite alternate ease-in-out;
+            pointer-events: none;
         }
 
         @keyframes breathe {
-            0%, 100% { opacity: 0.2; transform: translateY(0); }
-            50% { opacity: 1; transform: translateY(5px); }
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; }
+            100% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
         }
 
-        .footer {
-            margin-top: 4rem;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            border-top: 1px solid var(--accent);
-            padding-top: 2rem;
-            width: 100%;
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
         }
-        
-        .footer a {
-            color: var(--text-muted);
-            text-decoration: none;
-            margin: 0 1rem;
-            transition: color 0.4s ease;
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 10px;
         }
 
-        .footer a:hover {
-            color: var(--text-pure);
+        .grain-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 50;
         }
-
     </style>
 </head>
-<body>
+<body class="antialiased selection:bg-gray-800 selection:text-white">
 
-    <div class="progress-bar" id="progressBar"></div>
+    <div class="grain-overlay"></div>
+    <div class="ambient-glow"></div>
 
-    <section style="position: relative;">
-        <h1 class="reveal title-huge">Há uma beleza silenciosa<br>em admitir a própria fragilidade.</h1>
-        <div class="scroll-down">Continue</div>
-    </section>
-
-    <section>
-        <p class="reveal">Durante muito tempo, o mundo me fez convites sedutores, e tentei caminhar por mim mesmo, acreditando que a bússola das minhas próprias vontades seria o suficiente.</p>
-        <p class="reveal delay-1">Mas o caminho é ruidoso, e eu aprendi — muitas vezes da maneira mais dolorosa — que não posso confiar apenas em mim.</p>
-    </section>
-
-    <section>
-        <p class="reveal">O bem que almejo frequentemente me escapa, e os desvios tiram o meu foco daquilo que é eterno.</p>
-    </section>
-
-    <section>
-        <div class="reveal quote-emphasis">
-            "Se eu estiver andando num caminho e não enxergar as armadilhas, que a Sua mão me arranque de lá."
+    <!-- Seção de Abertura -->
+    <header class="min-h-screen flex flex-col items-center justify-center relative px-6 text-center">
+        <p class="reveal-text text-sm text-gray-500 tracking-[0.3em] uppercase mb-8">Uma Carta Aberta</p>
+        <h1 class="reveal-text title-font text-5xl md:text-7xl lg:text-8xl font-light tracking-wide leading-tight text-gray-200">
+            O Que Fica<br>
+            <span class="italic text-gray-500">no Silêncio</span>
+        </h1>
+        <div class="reveal-text mt-24 animate-bounce">
+            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
         </div>
-    </section>
+    </header>
 
-    <section>
-        <p class="reveal">Hoje, eu reconheço que sozinho não chego a lugar nenhum. Sou um projeto em constante construção, uma obra imperfeita que precisa ser guiada para não ceder às falhas que trago em mim.</p>
-        <p class="reveal delay-1">Esta página, e tudo o que construo através do código e da vida, é o reflexo de alguém que abriu mão do controle.</p>
-    </section>
-
-    <section>
-        <p class="reveal">Porque sei que quando o meu foco se afasta, a vida estagna.</p>
-        <h2 class="reveal delay-1 title-huge" style="margin-top: 2rem;">Mas quando permito que o Pai segure a minha mão e me puxe de volta para o rumo certo, a vida, enfim, volta a fluir.</h2>
+    <!-- Corpo da Carta -->
+    <main class="max-w-2xl mx-auto px-6 py-24 md:py-32 space-y-32 text-lg md:text-xl leading-relaxed text-gray-300">
         
-        <div class="reveal delay-2 footer">
-            <a href="https://github.com/dllanoir" target="_blank">GitHub</a>
-            <a href="mailto:diogolll.13@gmail.com">Contato</a>
+        <section class="reveal-text">
+            <p>
+                Sempre me veem resolvendo as coisas. O meu lado de fora é um relógio que não atrasa, uma engrenagem que não para. Eu me acostumei a ser o porto seguro, a mente lógica, a pessoa que encontra as saídas quando o labirinto parece escuro demais para os outros.
+            </p>
+        </section>
+
+        <section class="reveal-text">
+            <p>
+                Mas eu escrevo isso para tirar a máscara, mesmo que só por alguns minutos. Porque a verdade é que, aqui dentro, a mente pesa. O fluxo constante de pensamentos, projetos e responsabilidades às vezes soa como um ruído ensurdecedor que eu não sei como desligar.
+            </p>
+        </section>
+
+        <section class="reveal-text border-l-4 border-gray-800 pl-6 my-12 italic text-gray-400">
+            <p>
+                Eu sinto tudo de forma absurdamente profunda. E, talvez por sentir tanto, eu tenha aprendido a demonstrar tão pouco.
+            </p>
+        </section>
+
+        <section class="reveal-text">
+            <p>
+                Há dias em que o meu maior desejo não é conquistar o mundo, bater uma meta ou criar algo brilhante. Meu maior desejo é apenas o direito de ser vulnerável. O direito de não saber o que fazer. O direito de deitar no chão da sala, olhar para o teto e deixar que as lágrimas que eu engoli durante a semana inteira finalmente encontrem o caminho de casa.
+            </p>
+        </section>
+
+        <section class="reveal-text">
+            <p>
+                Eu tenho medos que não conto a ninguém. Medo de não ser suficiente, medo de estar correndo na direção errada, medo de que, se eu parar por um segundo, tudo desmorone. Eu carrego uma solidão estranha — não a de não ter pessoas por perto, mas a de nem sempre ser compreendido na minha essência mais crua.
+            </p>
+        </section>
+
+        <section class="reveal-text">
+            <p>
+                Mas, curiosamente, é exatamente nesse abismo íntimo que mora a minha maior força.
+            </p>
+            <p class="mt-6">
+                Porque é dessa sensibilidade escondida que nasce a minha empatia. É porque eu sinto as rachaduras da vida que eu consigo construir coisas tão sólidas. Eu amo com uma intensidade calada, mas inabalável. Eu aprecio as pequenas belezas — um céu de fim de tarde, um vento frio no rosto, o cheiro de café novo — como âncoras que me prendem ao momento presente.
+            </p>
+        </section>
+
+        <section class="reveal-text">
+            <p>
+                Se você está lendo isso, saiba que esta é a minha versão sem filtros. Sem a armadura.
+            </p>
+            <p class="mt-6">
+                Eu sou feito de cicatrizes invisíveis, de sonhos imensos e de uma vontade infinita de encontrar paz no meio do caos. Eu sou imperfeito, cansado às vezes, mas profundamente humano. E, pela primeira vez em muito tempo, eu acho que... <span class="italic text-gray-100">está tudo bem ser assim.</span>
+            </p>
+        </section>
+
+    </main>
+
+    <!-- Encerramento -->
+    <footer class="min-h-screen flex flex-col items-center justify-center relative px-6 text-center border-t border-gray-900 mt-24">
+        <div class="reveal-text space-y-6">
+            <p class="title-font text-2xl md:text-3xl text-gray-400 italic">"Respire."</p>
+            <div class="w-px h-24 bg-gradient-to-b from-gray-600 to-transparent mx-auto mt-8"></div>
         </div>
-    </section>
+    </footer>
 
     <script>
-        // Lógica da Barra de Progresso
-        window.addEventListener('scroll', () => {
-            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (scrollTop / scrollHeight) * 100;
-            document.getElementById('progressBar').style.width = scrolled + '%';
-        });
+        // Lógica para revelar os textos conforme o scroll (Fade in / Blur out)
+        document.addEventListener("DOMContentLoaded", () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -15% 0px', // Aciona um pouco antes de chegar ao centro
+                threshold: 0.1
+            };
 
-        // Lógica Avançada de Revelação (Intersection Observer)
-        // Isso garante que o texto só apareça quando estiver no centro da tela
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.3 // O elemento aparece quando 30% dele está visível na tela
-        };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // Opcional: Descomente a linha abaixo se quiser que a animação ocorra apenas uma vez
+                        // observer.unobserve(entry.target); 
+                    } else {
+                        // Remove a classe se sair da tela para refazer a animação ao voltar
+                        entry.target.classList.remove('visible');
+                    }
+                });
+            }, observerOptions);
 
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    // Opcional: remover o observer depois que aparece para não animar de novo ao subir
-                    // observer.unobserve(entry.target); 
-                } else {
-                    // Remove a classe se quiser que o texto suma ao sair da tela
-                    entry.target.classList.remove('active');
-                }
-            });
-        }, observerOptions);
+            const textElements = document.querySelectorAll('.reveal-text');
+            textElements.forEach(el => observer.observe(el));
 
-        document.querySelectorAll('.reveal').forEach((element) => {
-            observer.observe(element);
+            // Aciona imediatamente os elementos que já estão na tela ao carregar
+            setTimeout(() => {
+                textElements.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if(rect.top < window.innerHeight) {
+                        el.classList.add('visible');
+                    }
+                });
+            }, 100);
         });
     </script>
 </body>
