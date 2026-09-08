@@ -21,10 +21,11 @@
 @media(max-width:350px){.site-header{padding-left:12px;padding-right:12px;gap:10px}.site-header nav{gap:10px}.site-header nav a{font-size:9px}}
 @media print{.site-header{display:none}}
 
-/* Approved logo: retain the original artwork and frame its transparent margins. */
-.couple-logo{position:relative;display:block;flex-shrink:0;width:94px;height:82px;overflow:hidden}
-.couple-logo img{position:absolute;width:160%;max-width:none;height:auto;left:-28%;top:-36%}
-.site-header{padding-top:8px;padding-bottom:8px}
-footer .couple-logo{width:125px;height:110px}
-@media(max-width:600px){.couple-logo{width:66px;height:58px}.site-header{gap:12px;padding-top:6px;padding-bottom:6px}.site-header nav{gap:11px}footer .couple-logo{width:105px;height:92px}}
-@media(max-width:350px){.couple-logo{width:58px;height:51px}.site-header{gap:8px}.site-header nav{gap:8px}}
+/* Frame the monogram with breathing room, excluding the name line. */
+.brand-lockup{display:flex;align-items:center;gap:18px;flex-shrink:0}
+.brand-caption{font:9px/1.8 var(--sans);letter-spacing:2px;color:var(--muted)}
+.couple-logo{position:relative;display:block;flex-shrink:0;width:100px;aspect-ratio:875/650;overflow:hidden}
+.couple-logo img{position:absolute;width:143.3143%;max-width:none;height:auto;left:-21.1429%;top:-36.1538%}
+.site-header{padding-top:10px;padding-bottom:10px}
+footer .couple-logo{width:125px}
+@media(max-width:600px){.couple-logo{width:78px}.site-header{flex-direction:column;gap:3px;padding-top:8px;padding-bottom:5px}.brand-lockup{gap:14px}.brand-caption{font-size:8px;letter-spacing:1.7px}.site-header nav{width:100%;justify-content:space-between;gap:10px}.site-header nav a{font-size:11px;min-height:38px}footer .couple-logo{width:105px}html{scroll-padding-top:130px}section[id],details[id]{scroll-margin-top:130px}}
